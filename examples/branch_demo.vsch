@@ -1,0 +1,112 @@
+{
+  "format": "VerilogCanvas",
+  "version": 8,
+  "language": "verilog",
+  "top": "branch_demo",
+  "nodes": [
+    {
+      "id": "a",
+      "kind": "input",
+      "module": "my_module",
+      "name": "data",
+      "x": 80,
+      "y": 100,
+      "w": 240,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "data",
+          "span": "7:0",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {},
+      "transforms": {}
+    },
+    {
+      "id": "b",
+      "kind": "module",
+      "module": "my_module",
+      "name": "u_b",
+      "x": 800,
+      "y": 100,
+      "w": 240,
+      "h": 160,
+      "inputs": [
+        {
+          "name": "a",
+          "span": "7:0",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [],
+      "params": {},
+      "transforms": {}
+    },
+    {
+      "id": "c",
+      "kind": "module",
+      "module": "my_module",
+      "name": "u_c",
+      "x": 800,
+      "y": 400,
+      "w": 240,
+      "h": 160,
+      "inputs": [
+        {
+          "name": "a",
+          "span": "7:0",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [],
+      "params": {},
+      "transforms": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "36a8b613988b4235a1791280ac983ee4",
+      "source": [
+        "a",
+        "data"
+      ],
+      "target": [
+        "b",
+        "a"
+      ],
+      "points": [],
+      "end": null,
+      "join_wire": null,
+      "join_position": 0.5
+    },
+    {
+      "id": "d268aaee479146668d933ca3c1a4254d",
+      "source": null,
+      "target": [
+        "c",
+        "a"
+      ],
+      "points": [],
+      "end": [
+        560,
+        160
+      ],
+      "join_wire": "36a8b613988b4235a1791280ac983ee4",
+      "join_position": 0.5
+    }
+  ],
+  "labels": [],
+  "comments": [],
+  "declarations": ""
+}

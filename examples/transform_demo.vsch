@@ -1,0 +1,74 @@
+{
+  "format": "VerilogCanvas",
+  "version": 6,
+  "language": "systemverilog",
+  "top": "transform_demo_top",
+  "nodes": [
+    {
+      "id": "source",
+      "kind": "input",
+      "module": "my_module",
+      "name": "modulation",
+      "x": 240,
+      "y": 160,
+      "w": 240,
+      "h": 160,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "modulation",
+          "span": "2:0",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {},
+      "transforms": {}
+    },
+    {
+      "id": "sink",
+      "kind": "module",
+      "module": "agc",
+      "name": "inst_agc",
+      "x": 700,
+      "y": 160,
+      "w": 240,
+      "h": 160,
+      "inputs": [
+        {
+          "name": "mode",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [],
+      "params": {},
+      "transforms": {
+        "mode": "($ == MOD_AM) ? 1'b1 : 1'b0"
+      }
+    }
+  ],
+  "wires": [
+    {
+      "id": "feec9fc236334ba38805c4ac3ca49e1d",
+      "source": [
+        "source",
+        "modulation"
+      ],
+      "target": [
+        "sink",
+        "mode"
+      ],
+      "points": [],
+      "end": null
+    }
+  ],
+  "labels": [],
+  "comments": [],
+  "declarations": "typedef enum logic [2:0] {MOD_AM = 3'd0, MOD_FM = 3'd1} modulation_t;"
+}

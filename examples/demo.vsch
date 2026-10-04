@@ -1,0 +1,228 @@
+{
+  "format": "VerilogCanvas",
+  "version": 1,
+  "top": "demo_top",
+  "nodes": [
+    {
+      "id": "clk",
+      "kind": "input",
+      "module": "my_module",
+      "name": "clk",
+      "x": 80,
+      "y": 80,
+      "w": 180,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "clk",
+          "span": ""
+        }
+      ],
+      "params": {}
+    },
+    {
+      "id": "rst_n",
+      "kind": "input",
+      "module": "my_module",
+      "name": "rst_n",
+      "x": 80,
+      "y": 260,
+      "w": 180,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "rst_n",
+          "span": ""
+        }
+      ],
+      "params": {}
+    },
+    {
+      "id": "data_in",
+      "kind": "input",
+      "module": "my_module",
+      "name": "data_in",
+      "x": 80,
+      "y": 440,
+      "w": 180,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "data_in",
+          "span": "7:0"
+        }
+      ],
+      "params": {}
+    },
+    {
+      "id": "pipe",
+      "kind": "module",
+      "module": "data_pipe",
+      "name": "u_pipe",
+      "x": 480,
+      "y": 260,
+      "w": 320,
+      "h": 240,
+      "inputs": [
+        {
+          "name": "clk",
+          "span": ""
+        },
+        {
+          "name": "rst_n",
+          "span": ""
+        },
+        {
+          "name": "data_in",
+          "span": "WIDTH-1:0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "data_out",
+          "span": "WIDTH-1:0"
+        }
+      ],
+      "params": {
+        "WIDTH": "8"
+      }
+    },
+    {
+      "id": "data_out",
+      "kind": "output",
+      "module": "my_module",
+      "name": "data_out",
+      "x": 1000,
+      "y": 260,
+      "w": 180,
+      "h": 100,
+      "inputs": [
+        {
+          "name": "data_out",
+          "span": "7:0"
+        }
+      ],
+      "outputs": [],
+      "params": {}
+    },
+    {
+      "id": "monitor",
+      "kind": "output",
+      "module": "my_module",
+      "name": "monitor",
+      "x": 1000,
+      "y": 440,
+      "w": 180,
+      "h": 100,
+      "inputs": [
+        {
+          "name": "monitor",
+          "span": "7:0"
+        }
+      ],
+      "outputs": [],
+      "params": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "4487a57140ce4a97922ef66c7511c249",
+      "source": [
+        "clk",
+        "clk"
+      ],
+      "target": [
+        "pipe",
+        "clk"
+      ],
+      "points": [
+        [
+          360,
+          140
+        ],
+        [
+          360,
+          320
+        ]
+      ]
+    },
+    {
+      "id": "3d91d47990a445eaaa58737d2907e226",
+      "source": [
+        "rst_n",
+        "rst_n"
+      ],
+      "target": [
+        "pipe",
+        "rst_n"
+      ],
+      "points": [
+        [
+          400,
+          320
+        ],
+        [
+          400,
+          360
+        ]
+      ]
+    },
+    {
+      "id": "8a32b5b3e26f4d38ad9c02914a276534",
+      "source": [
+        "data_in",
+        "data_in"
+      ],
+      "target": [
+        "pipe",
+        "data_in"
+      ],
+      "points": [
+        [
+          440,
+          500
+        ],
+        [
+          440,
+          400
+        ]
+      ]
+    },
+    {
+      "id": "9159a65f8c3640a291f53a0dcfb18bfd",
+      "source": [
+        "pipe",
+        "data_out"
+      ],
+      "target": [
+        "data_out",
+        "data_out"
+      ],
+      "points": []
+    },
+    {
+      "id": "258203e8c6cb400a81827a5daf73c16a",
+      "source": [
+        "pipe",
+        "data_out"
+      ],
+      "target": [
+        "monitor",
+        "monitor"
+      ],
+      "points": [
+        [
+          900,
+          320
+        ],
+        [
+          900,
+          500
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "format": "VerilogCanvas",
+  "version": 9,
+  "language": "verilog",
+  "top": "group_demo",
+  "nodes": [
+    {
+      "id": "a",
+      "kind": "module",
+      "module": "source",
+      "name": "u_a",
+      "x": 200,
+      "y": 200,
+      "w": 240,
+      "h": 160,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "y",
+          "span": "7:0",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {},
+      "transforms": {}
+    },
+    {
+      "id": "outside",
+      "kind": "module",
+      "module": "source",
+      "name": "u_outside",
+      "x": 1400,
+      "y": 200,
+      "w": 240,
+      "h": 160,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "y",
+          "span": "7:0",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {},
+      "transforms": {}
+    },
+    {
+      "id": "b",
+      "kind": "module",
+      "module": "sink",
+      "name": "u_b",
+      "x": 600,
+      "y": 200,
+      "w": 240,
+      "h": 160,
+      "inputs": [
+        {
+          "name": "a",
+          "span": "7:0",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [],
+      "params": {},
+      "transforms": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "e5f89853f7e044cebb272557d01072f8",
+      "source": [
+        "a",
+        "y"
+      ],
+      "target": [
+        "b",
+        "a"
+      ],
+      "points": [
+        [
+          480,
+          260
+        ],
+        [
+          480,
+          400
+        ],
+        [
+          560,
+          400
+        ]
+      ],
+      "end": null,
+      "join_wire": null,
+      "join_position": 0.5
+    }
+  ],
+  "labels": [],
+  "comments": [
+    {
+      "id": "g",
+      "text": "PROCESSING",
+      "x": 100,
+      "y": 100,
+      "w": 1000,
+      "font_size": 12,
+      "h": 500,
+      "kind": "group"
+    },
+    {
+      "id": "61746dc2d3c04138ad4c2e36b63e674b",
+      "text": "Documentation only",
+      "x": 20,
+      "y": 800,
+      "w": 360,
+      "font_size": 12,
+      "h": 100,
+      "kind": "text"
+    }
+  ],
+  "declarations": ""
+}

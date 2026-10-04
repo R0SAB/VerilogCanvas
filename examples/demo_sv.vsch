@@ -1,0 +1,205 @@
+{
+  "format": "VerilogCanvas",
+  "version": 2,
+  "language": "systemverilog",
+  "top": "demo_sv_top",
+  "nodes": [
+    {
+      "id": "f24a2c2bdef94c2e903ce9210eef96e5",
+      "kind": "module",
+      "module": "sv_pipeline",
+      "name": "u_sv_pipeline",
+      "x": 500,
+      "y": 240,
+      "w": 460,
+      "h": 180,
+      "inputs": [
+        {
+          "name": "clk",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        },
+        {
+          "name": "rst_n",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        },
+        {
+          "name": "data_in",
+          "span": "LANES - 1 : 0",
+          "signed": true,
+          "packed_extra": [
+            "WIDTH - 1 : 0"
+          ],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "data_out",
+          "span": "LANES - 1 : 0",
+          "signed": true,
+          "packed_extra": [
+            "WIDTH - 1 : 0"
+          ],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {
+        "WIDTH": "8",
+        "LANES": "2",
+        "LABEL": "\"pipeline\""
+      }
+    },
+    {
+      "id": "d9fe4c13833349d29e2396d4f41170b3",
+      "kind": "input",
+      "module": "my_module",
+      "name": "clk",
+      "x": 60,
+      "y": 60,
+      "w": 300,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "clk",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {}
+    },
+    {
+      "id": "96d4aa0c9cb54cc39bdf01620deca9c3",
+      "kind": "input",
+      "module": "my_module",
+      "name": "rst_n",
+      "x": 60,
+      "y": 260,
+      "w": 300,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "rst_n",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {}
+    },
+    {
+      "id": "99699413f2414b87a27a2729482c8ee3",
+      "kind": "input",
+      "module": "my_module",
+      "name": "data_in",
+      "x": 60,
+      "y": 460,
+      "w": 300,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "data_in",
+          "span": "1:0",
+          "signed": true,
+          "packed_extra": [
+            "7:0"
+          ],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {}
+    },
+    {
+      "id": "11fa2de0fafc4de6be9138380235ab88",
+      "kind": "output",
+      "module": "my_module",
+      "name": "data_out",
+      "x": 1100,
+      "y": 240,
+      "w": 300,
+      "h": 100,
+      "inputs": [
+        {
+          "name": "data_out",
+          "span": "1:0",
+          "signed": true,
+          "packed_extra": [
+            "7:0"
+          ],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [],
+      "params": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "41f52f8868db4aba8354a06427401006",
+      "source": [
+        "d9fe4c13833349d29e2396d4f41170b3",
+        "clk"
+      ],
+      "target": [
+        "f24a2c2bdef94c2e903ce9210eef96e5",
+        "clk"
+      ],
+      "points": []
+    },
+    {
+      "id": "d1b6a7102a344c459b4b9a119419b8b8",
+      "source": [
+        "96d4aa0c9cb54cc39bdf01620deca9c3",
+        "rst_n"
+      ],
+      "target": [
+        "f24a2c2bdef94c2e903ce9210eef96e5",
+        "rst_n"
+      ],
+      "points": []
+    },
+    {
+      "id": "1d4fb3c0118f45c8b809500db78e4635",
+      "source": [
+        "99699413f2414b87a27a2729482c8ee3",
+        "data_in"
+      ],
+      "target": [
+        "f24a2c2bdef94c2e903ce9210eef96e5",
+        "data_in"
+      ],
+      "points": []
+    },
+    {
+      "id": "04295876912a4ef4ac5932a09e37c901",
+      "source": [
+        "f24a2c2bdef94c2e903ce9210eef96e5",
+        "data_out"
+      ],
+      "target": [
+        "11fa2de0fafc4de6be9138380235ab88",
+        "data_out"
+      ],
+      "points": []
+    }
+  ]
+}

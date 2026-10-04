@@ -1,0 +1,329 @@
+{
+  "format": "VerilogCanvas",
+  "version": 5,
+  "language": "systemverilog",
+  "top": "label_demo_top",
+  "nodes": [
+    {
+      "id": "e240527d5b2d4711bb837229896f3bd3",
+      "kind": "module",
+      "module": "sv_pipeline",
+      "name": "u_sv_pipeline",
+      "x": 560,
+      "y": 200,
+      "w": 400,
+      "h": 320,
+      "inputs": [
+        {
+          "name": "clk",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        },
+        {
+          "name": "rst_n",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        },
+        {
+          "name": "data_in",
+          "span": "LANES-1:0",
+          "signed": true,
+          "packed_extra": [
+            "WIDTH-1:0"
+          ],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "data_out",
+          "span": "LANES-1:0",
+          "signed": true,
+          "packed_extra": [
+            "WIDTH-1:0"
+          ],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {
+        "WIDTH": "8",
+        "LANES": "2",
+        "LABEL": "\"pipeline\""
+      }
+    },
+    {
+      "id": "22a9931ada8e44498bcb62f46609d455",
+      "kind": "input",
+      "module": "my_module",
+      "name": "clk",
+      "x": 60,
+      "y": 80,
+      "w": 200,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "clk",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {}
+    },
+    {
+      "id": "629150b58bbf48438c7b783c5f0dd906",
+      "kind": "input",
+      "module": "my_module",
+      "name": "rst_n",
+      "x": 60,
+      "y": 260,
+      "w": 200,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "rst_n",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {}
+    },
+    {
+      "id": "a232c75b2e0d4e2784813ddc9a794af5",
+      "kind": "input",
+      "module": "my_module",
+      "name": "data_in",
+      "x": 60,
+      "y": 440,
+      "w": 200,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "data_in",
+          "span": "1:0",
+          "signed": true,
+          "packed_extra": [
+            "7:0"
+          ],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {}
+    },
+    {
+      "id": "8d0f3a5449744be199ae3ae46783aa52",
+      "kind": "output",
+      "module": "my_module",
+      "name": "data_out",
+      "x": 1120,
+      "y": 80,
+      "w": 240,
+      "h": 100,
+      "inputs": [
+        {
+          "name": "data_out",
+          "span": "1:0",
+          "signed": true,
+          "packed_extra": [
+            "7:0"
+          ],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [],
+      "params": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "af7bfb4f84e94c17a680c4009366be2e",
+      "source": [
+        "22a9931ada8e44498bcb62f46609d455",
+        "clk"
+      ],
+      "target": null,
+      "points": [],
+      "end": [
+        380,
+        140
+      ]
+    },
+    {
+      "id": "e3a2c47baa424018bcc722377dc54aca",
+      "source": null,
+      "target": [
+        "e240527d5b2d4711bb837229896f3bd3",
+        "clk"
+      ],
+      "points": [],
+      "end": [
+        380,
+        260
+      ]
+    },
+    {
+      "id": "6249ce6f7e954e059b2c604cf9632787",
+      "source": [
+        "629150b58bbf48438c7b783c5f0dd906",
+        "rst_n"
+      ],
+      "target": null,
+      "points": [],
+      "end": [
+        380,
+        320
+      ]
+    },
+    {
+      "id": "91cc730773774ed7b38ce9e439f4f508",
+      "source": null,
+      "target": [
+        "e240527d5b2d4711bb837229896f3bd3",
+        "rst_n"
+      ],
+      "points": [],
+      "end": [
+        380,
+        300
+      ]
+    },
+    {
+      "id": "594e88c99c664da79a4a7caf6e37dcc3",
+      "source": [
+        "a232c75b2e0d4e2784813ddc9a794af5",
+        "data_in"
+      ],
+      "target": null,
+      "points": [],
+      "end": [
+        380,
+        500
+      ]
+    },
+    {
+      "id": "c7e304f449ee4c8ca044eafab575aeb5",
+      "source": null,
+      "target": [
+        "e240527d5b2d4711bb837229896f3bd3",
+        "data_in"
+      ],
+      "points": [],
+      "end": [
+        380,
+        340
+      ]
+    },
+    {
+      "id": "0ff25ed551e248f997d7f167c51b2032",
+      "source": [
+        "e240527d5b2d4711bb837229896f3bd3",
+        "data_out"
+      ],
+      "target": null,
+      "points": [],
+      "end": [
+        1100,
+        260
+      ]
+    },
+    {
+      "id": "b3dda80edb22495eb72a5d3d45fdacf0",
+      "source": null,
+      "target": [
+        "8d0f3a5449744be199ae3ae46783aa52",
+        "data_out"
+      ],
+      "points": [],
+      "end": [
+        1000,
+        140
+      ]
+    }
+  ],
+  "labels": [
+    {
+      "id": "e4797d1eec1a497d8e0cab0023fd1049",
+      "name": "sys_clk",
+      "wire_id": "af7bfb4f84e94c17a680c4009366be2e",
+      "position": 0.15
+    },
+    {
+      "id": "06a79be93bf34dea87aeaaec1aac7248",
+      "name": "sys_clk",
+      "wire_id": "e3a2c47baa424018bcc722377dc54aca",
+      "position": 0.12
+    },
+    {
+      "id": "8487cb13d3c64260a3651f5361e84d2b",
+      "name": "reset_n",
+      "wire_id": "6249ce6f7e954e059b2c604cf9632787",
+      "position": 0.15
+    },
+    {
+      "id": "6085394f0df24a56bf99c65bcf729adb",
+      "name": "reset_n",
+      "wire_id": "91cc730773774ed7b38ce9e439f4f508",
+      "position": 0.12
+    },
+    {
+      "id": "357a237529164e27a02bc6c5bd30157e",
+      "name": "sample_bus",
+      "wire_id": "594e88c99c664da79a4a7caf6e37dcc3",
+      "position": 0.15
+    },
+    {
+      "id": "53fd20e4c7c147b58354e244e2dc1a34",
+      "name": "sample_bus",
+      "wire_id": "c7e304f449ee4c8ca044eafab575aeb5",
+      "position": 0.12
+    },
+    {
+      "id": "88c9d13cca8640578b0e6b3c9c6e37af",
+      "name": "result_bus",
+      "wire_id": "0ff25ed551e248f997d7f167c51b2032",
+      "position": 0.1
+    },
+    {
+      "id": "6101c5a630f9435f8b9c69828f3050b8",
+      "name": "result_bus",
+      "wire_id": "b3dda80edb22495eb72a5d3d45fdacf0",
+      "position": 0.05
+    }
+  ],
+  "comments": [
+    {
+      "id": "a201b8e8548743e2b95bb3ed2a19f8f5",
+      "text": "Schematic documentation example\nComments are not included in HDL.",
+      "x": 80,
+      "y": -100,
+      "w": 500,
+      "font_size": 12
+    },
+    {
+      "id": "5ef0ec5866b448d7b02b6171b0fe4068",
+      "text": "Matching labels connect remote segments of the same net.",
+      "x": 80,
+      "y": 700,
+      "w": 440,
+      "font_size": 12
+    }
+  ]
+}

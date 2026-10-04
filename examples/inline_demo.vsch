@@ -1,0 +1,257 @@
+{
+  "format": "VerilogCanvas",
+  "version": 11,
+  "language": "systemverilog",
+  "top": "top",
+  "nodes": [
+    {
+      "id": "5d550e60d89f4edebf39edcca90a987e",
+      "kind": "input",
+      "module": "my_module",
+      "name": "modulation",
+      "x": 60,
+      "y": 160,
+      "w": 240,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "modulation",
+          "span": "1:0",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {},
+      "transforms": {}
+    },
+    {
+      "id": "40641dadbc504b2fb86da8b67af7299d",
+      "kind": "input",
+      "module": "my_module",
+      "name": "enable",
+      "x": 60,
+      "y": 300,
+      "w": 240,
+      "h": 100,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "enable",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {},
+      "transforms": {}
+    },
+    {
+      "id": "ad6b6cb217024b4ca218ffb01cf83300",
+      "kind": "inline",
+      "module": "my_module",
+      "name": "mode_control",
+      "x": 440,
+      "y": 160,
+      "w": 420,
+      "h": 200,
+      "inputs": [
+        {
+          "name": "modulation",
+          "span": "1:0",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        },
+        {
+          "name": "enable",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mode",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "params": {},
+      "transforms": {}
+    },
+    {
+      "id": "8299b33bbc30458e8de6f7bcb543347e",
+      "kind": "output",
+      "module": "my_module",
+      "name": "mode",
+      "x": 980,
+      "y": 160,
+      "w": 240,
+      "h": 100,
+      "inputs": [
+        {
+          "name": "mode",
+          "span": "",
+          "signed": false,
+          "packed_extra": [],
+          "unpacked": [],
+          "two_state": false
+        }
+      ],
+      "outputs": [],
+      "params": {},
+      "transforms": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "12ee086e141144b1a16b35d23156d7ef",
+      "source": [
+        "5d550e60d89f4edebf39edcca90a987e",
+        "modulation"
+      ],
+      "target": [
+        "ad6b6cb217024b4ca218ffb01cf83300",
+        "modulation"
+      ],
+      "points": [],
+      "end": null,
+      "join_wire": null,
+      "join_position": 0.5,
+      "vertices": [
+        [
+          "2ce869a3861f47c0b15f0154c23a1dec",
+          300,
+          220
+        ],
+        [
+          "abfe0644a2ca46b7a8a21d902ac60129",
+          440,
+          220
+        ]
+      ],
+      "join_vertex": null
+    },
+    {
+      "id": "b14344e191ad4885bf461712bcc1fc66",
+      "source": [
+        "40641dadbc504b2fb86da8b67af7299d",
+        "enable"
+      ],
+      "target": [
+        "ad6b6cb217024b4ca218ffb01cf83300",
+        "enable"
+      ],
+      "points": [],
+      "end": null,
+      "join_wire": null,
+      "join_position": 0.5,
+      "vertices": [
+        [
+          "93376dbab45e494985a86eda9b4264cf",
+          300,
+          360
+        ],
+        [
+          "5e637670a6534ac08fd7286c6a603a3a",
+          360,
+          360
+        ],
+        [
+          "41c634598cfb4d299a9380246aecd69b",
+          360,
+          260
+        ],
+        [
+          "7640d19371ea4d8b927208827ad70e58",
+          440,
+          260
+        ]
+      ],
+      "join_vertex": null
+    },
+    {
+      "id": "c4c7933246bf4db3befaba7ce534f09f",
+      "source": [
+        "ad6b6cb217024b4ca218ffb01cf83300",
+        "mode"
+      ],
+      "target": [
+        "8299b33bbc30458e8de6f7bcb543347e",
+        "mode"
+      ],
+      "points": [],
+      "end": null,
+      "join_wire": null,
+      "join_position": 0.5,
+      "vertices": [
+        [
+          "9bbc0640b2e540c4b53b489d02899488",
+          860,
+          220
+        ],
+        [
+          "2939f09aa2a249c7a87b9c28d74c5fe5",
+          980,
+          220
+        ]
+      ],
+      "join_vertex": null
+    }
+  ],
+  "labels": [],
+  "comments": [
+    {
+      "id": "d9c7bb44fe56477390593bbf8b2c7729",
+      "text": "Orange blocks contain HDL inserted directly into the top level.\nDouble-click Mode control to edit its source and port declarations.",
+      "x": 400,
+      "y": 460,
+      "w": 600,
+      "font_size": 12,
+      "h": 100,
+      "kind": "text"
+    }
+  ],
+  "hdl_records": [
+    {
+      "owner": "top",
+      "label": "Top-level declarations",
+      "bytes": 66,
+      "begin": "// ===== BEGIN HDL 0d89e277556747a1a8bac84d35f9363c_0 \"Top-level declarations\" =====",
+      "end": "// ===== END HDL 0d89e277556747a1a8bac84d35f9363c_0 ====="
+    },
+    {
+      "owner": "ad6b6cb217024b4ca218ffb01cf83300",
+      "label": "mode_control",
+      "bytes": 183,
+      "begin": "// ===== BEGIN HDL 0d89e277556747a1a8bac84d35f9363c_1 \"mode_control\" =====",
+      "end": "// ===== END HDL 0d89e277556747a1a8bac84d35f9363c_1 ====="
+    }
+  ]
+}
+
+// ===== BEGIN HDL 0d89e277556747a1a8bac84d35f9363c_0 "Top-level declarations" =====
+typedef enum logic [1:0] { MOD_AM = 0, MOD_FM = 1 } modulation_t;
+
+// ===== END HDL 0d89e277556747a1a8bac84d35f9363c_0 =====
+
+// ===== BEGIN HDL 0d89e277556747a1a8bac84d35f9363c_1 "mode_control" =====
+// Prototype mode decoding; MOD_AM is declared in the top level.
+input logic [1:0] modulation;
+input logic enable;
+output logic mode;
+
+assign mode = enable && (modulation == MOD_AM);
+
+// ===== END HDL 0d89e277556747a1a8bac84d35f9363c_1 =====
