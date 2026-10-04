@@ -3,7 +3,7 @@ name: Import archive contents
 on:
   push:
     paths:
-      - '.bootstrap/part09'
+      - '.bootstrap/part04b'
 
 permissions:
   contents: write
@@ -19,7 +19,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat .bootstrap/part* | base64 -d > /tmp/source.zip
+          {
+            cat .bootstrap/part00 .bootstrap/part01 .bootstrap/part02 .bootstrap/part03
+            cat .bootstrap/part04a .bootstrap/part04b
+            cat .bootstrap/part05 .bootstrap/part06 .bootstrap/part07 .bootstrap/part08 .bootstrap/part09
+          } | base64 -d > /tmp/source.zip
+          unzip -t /tmp/source.zip
           mkdir -p /tmp/unpack
           unzip -q /tmp/source.zip -d /tmp/unpack
           cp -a /tmp/unpack/VerilogCanvas_Qt/. .
@@ -27,8 +32,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          rm -rf .bootstrap
+          rm -f .github/workflows/bootstrap.yml
+          rmdir .github/workflows 2>/dev/null || true
+          rmdir .github 2>/dev/null || true
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add README.md *.py *.txt *.bat examples tests
+          git add -A
           git commit -m 'Import VerilogCanvas from provided archive'
           git push
