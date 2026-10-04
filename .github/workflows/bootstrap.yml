@@ -3,7 +3,7 @@ name: Import archive contents
 on:
   push:
     paths:
-      - '.bootstrap/part04b'
+      - '.bootstrap/part08b'
 
 permissions:
   contents: write
@@ -22,7 +22,9 @@ jobs:
           {
             cat .bootstrap/part00 .bootstrap/part01 .bootstrap/part02 .bootstrap/part03
             cat .bootstrap/part04a .bootstrap/part04b
-            cat .bootstrap/part05 .bootstrap/part06 .bootstrap/part07 .bootstrap/part08 .bootstrap/part09
+            cat .bootstrap/part05 .bootstrap/part06 .bootstrap/part07
+            cat .bootstrap/part08a .bootstrap/part08b
+            cat .bootstrap/part09
           } | base64 -d > /tmp/source.zip
           unzip -t /tmp/source.zip
           mkdir -p /tmp/unpack
