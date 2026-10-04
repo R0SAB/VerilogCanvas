@@ -1,0 +1,34 @@
+name: Import archive contents
+
+on:
+  push:
+    paths:
+      - '.bootstrap/part09'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconstruct and extract archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/part* | base64 -d > /tmp/source.zip
+          mkdir -p /tmp/unpack
+          unzip -q /tmp/source.zip -d /tmp/unpack
+          cp -a /tmp/unpack/VerilogCanvas_Qt/. .
+      - name: Commit imported project files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md *.py *.txt *.bat examples tests
+          git commit -m 'Import VerilogCanvas from provided archive'
+          git push
