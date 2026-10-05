@@ -1,0 +1,101 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.py'
+      - 'requirements_qt.txt'
+      - 'examples/**'
+      - '.github/workflows/build-windows.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Windows x64
+    runs-on: windows-2022
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      PYTHONUTF8: '1'
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+          architecture: x64
+          cache: pip
+          cache-dependency-path: requirements_qt.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pip install -r requirements_qt.txt "pyinstaller>=6,<7"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Test document model and HDL generation
+        run: python -m unittest discover -s tests -q
+
+      - name: Test Qt interactions
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          $checks = @(
+            'qt_preview_smoke.py',
+            'qt_grid_smoke.py',
+            'qt_editor_smoke.py',
+            'qt_segments_smoke.py',
+            'qt_junction_markers_smoke.py',
+            'qt_consumed_tips_smoke.py'
+          )
+          foreach ($check in $checks) {
+            Write-Host "Running $check"
+            python "tests/$check"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+
+      - name: Build standalone executable
+        run: python -m PyInstaller --noconfirm --clean --onefile --windowed --exclude-module tkinter --name VerilogCanvasQt qt_editor.py
+
+      - name: Record build information
+        run: |
+          if (-not (Test-Path 'dist/VerilogCanvasQt.exe')) { throw 'Executable not found' }
+          $hash = (Get-FileHash 'dist/VerilogCanvasQt.exe' -Algorithm SHA256).Hash.ToLower()
+          "$hash  VerilogCanvasQt.exe" | Set-Content -Encoding utf8 dist/SHA256SUMS.txt
+          @(
+            "Repository: $env:GITHUB_REPOSITORY"
+            "Commit: $env:GITHUB_SHA"
+            "Run: https://github.com/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+            "Platform: Windows x64"
+            "Python: $(python --version)"
+            ""
+            "Installed build dependencies:"
+          ) | Set-Content -Encoding utf8 dist/BUILD_INFO.txt
+          python -m pip freeze | Add-Content -Encoding utf8 dist/BUILD_INFO.txt
+
+      - name: Upload Windows executable
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: VerilogCanvasQt-windows-x64
+          path: |
+            dist/VerilogCanvasQt.exe
+            dist/SHA256SUMS.txt
+            dist/BUILD_INFO.txt
+          if-no-files-found: error
+          retention-days: 30
