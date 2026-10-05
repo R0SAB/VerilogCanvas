@@ -135,8 +135,8 @@ try:
         assert w.save(path=schematic);assert Document.load(schematic).serialize()==w.doc.serialize()
         assert w.save(True,path=other) and w.path==other
         assert w.export(path=hdl),errors;assert 'assign result = data + 1;' in hdl.read_text();assert 'module top_design' in hdl.read_text()
-        assert w.export();assert w.output_path.text()==str(hdl)
-        assert w.save();assert Document.load(other).export_path==str(hdl)
+        assert w.export();assert Path(w.output_path.text()).resolve()==hdl.resolve()
+        assert w.save();assert Path(Document.load(other).export_path).resolve()==hdl.resolve()
         assert source in other.read_text()
         state=w.doc.serialize();w.select('node','logic');width,height=w.render_png(png)
         image=QImage(str(png));assert not image.isNull() and image.width()==width and image.height()==height
