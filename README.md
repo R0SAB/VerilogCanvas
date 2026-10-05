@@ -23,6 +23,22 @@ Single-file packaging extracts the required libraries at startup. The Qt bundle
 will be larger than the old Tkinter EXE. Build on Windows: the release was checked
 with Qt's offscreen platform on Linux, not as a Windows binary.
 
+## Build on GitHub
+
+The **Build Windows EXE** workflow runs on a GitHub-hosted Windows x64 runner.
+It starts automatically when source, examples, dependencies or the workflow change
+on `main`. To build manually, open **Actions > Build Windows EXE > Run workflow**.
+
+After a successful run, open its summary and download
+**VerilogCanvasQt-windows-x64** from **Artifacts**. Extract the ZIP and run
+`VerilogCanvasQt.exe`. The accompanying checksum and build information files are
+for verification only; the executable does not require them.
+
+Artifacts are retained for 30 days. The workflow runs the model and six Qt checks
+before packaging with PyInstaller. It uses Python 3.12 and read-only repository
+permissions; no personal token or signing secret is required. These builds are
+unsigned and are not automatically published as GitHub Releases.
+
 ## Editing
 
 - Add module templates, import interfaces from `.v` / `.sv`, or add Inline HDL.
