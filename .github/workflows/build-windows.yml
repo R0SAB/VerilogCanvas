@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '**.py'
+      - '.gitattributes'
       - 'requirements_qt.txt'
       - 'examples/**'
       - '.github/workflows/build-windows.yml'
