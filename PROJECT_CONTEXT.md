@@ -253,17 +253,22 @@ general optimal autorouter.
 ## GitHub-hosted Windows builds (2026-10-05)
 
 - `.github/workflows/build-windows.yml` builds on Windows Server 2022 x64 with
-  Python 3.12. Source/dependency/example/workflow/checkout-attribute changes on
-  main trigger it; workflow_dispatch permits manual builds.
+  Python 3.12. Per the user's explicit preference, **workflow_dispatch is the
+  only trigger**. Do not restore automatic builds on pushes/source changes.
+  Manual dispatch requires a new release tag.
 - The model suite and all six Qt smoke scripts have passed on the Windows runner.
   The model run reports 166 tests, including 12 skips for unavailable optional
   HDL compiler dependencies. This does not replace interactive user acceptance
   testing of the packaged executable.
-- PyInstaller produces the one-file windowed EXE. The workflow uploads
-  `VerilogCanvasQt-windows-x64` with the EXE, SHA256SUMS.txt and BUILD_INFO.txt,
-  retaining artifacts for 30 days. README explains downloading/manual triggering.
-- Actions are pinned by commit; repository permission is contents:read.
-  No signing or automatic GitHub Release publication is configured.
+- PyInstaller produces the one-file windowed EXE. After tests/build succeed, the
+  workflow publishes a GitHub Release with the EXE as a separate asset,
+  VerilogCanvas-source.zip from the exact built commit, checksums and build info.
+  It prepares a draft, uploads assets, then publishes. Existing tags are rejected.
+  These are release assets, not 30-day Actions artifacts.
+- Actions are pinned by commit; contents:write permits release publication using
+  the built-in token. No executable signing is configured.
+- The earlier Windows build was successfully tested; the manual release upload
+  workflow still needs its first user-triggered run.
 - **Keep `*.vsch -text` in .gitattributes.** These files contain byte-counted
   HDL records. Windows Git newline conversion corrupted example records and
   caused a modal load error during the first CI attempt.
