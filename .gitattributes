@@ -1,0 +1,2 @@
+# Schematic HDL records contain byte lengths; newline conversion corrupts them.
+*.vsch -text
