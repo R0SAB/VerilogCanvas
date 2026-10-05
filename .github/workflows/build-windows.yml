@@ -52,23 +52,47 @@ jobs:
       - name: Test document model and HDL generation
         run: python -m unittest discover -s tests -q
 
-      - name: Test Qt interactions
+      - name: Test qt_preview_smoke.py
+        timeout-minutes: 2
         env:
           QT_QPA_PLATFORM: offscreen
-        run: |
-          $checks = @(
-            'qt_preview_smoke.py',
-            'qt_grid_smoke.py',
-            'qt_editor_smoke.py',
-            'qt_segments_smoke.py',
-            'qt_junction_markers_smoke.py',
-            'qt_consumed_tips_smoke.py'
-          )
-          foreach ($check in $checks) {
-            Write-Host "Running $check"
-            python "tests/$check"
-            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          }
+          PYTHONUNBUFFERED: '1'
+        run: python tests/qt_preview_smoke.py
+
+      - name: Test qt_grid_smoke.py
+        timeout-minutes: 2
+        env:
+          QT_QPA_PLATFORM: offscreen
+          PYTHONUNBUFFERED: '1'
+        run: python tests/qt_grid_smoke.py
+
+      - name: Test qt_editor_smoke.py
+        timeout-minutes: 2
+        env:
+          QT_QPA_PLATFORM: offscreen
+          PYTHONUNBUFFERED: '1'
+        run: python tests/qt_editor_smoke.py
+
+      - name: Test qt_segments_smoke.py
+        timeout-minutes: 2
+        env:
+          QT_QPA_PLATFORM: offscreen
+          PYTHONUNBUFFERED: '1'
+        run: python tests/qt_segments_smoke.py
+
+      - name: Test qt_junction_markers_smoke.py
+        timeout-minutes: 2
+        env:
+          QT_QPA_PLATFORM: offscreen
+          PYTHONUNBUFFERED: '1'
+        run: python tests/qt_junction_markers_smoke.py
+
+      - name: Test qt_consumed_tips_smoke.py
+        timeout-minutes: 2
+        env:
+          QT_QPA_PLATFORM: offscreen
+          PYTHONUNBUFFERED: '1'
+        run: python tests/qt_consumed_tips_smoke.py
 
       - name: Build standalone executable
         run: python -m PyInstaller --noconfirm --clean --onefile --windowed --exclude-module tkinter --name VerilogCanvasQt qt_editor.py
