@@ -23,21 +23,29 @@ Single-file packaging extracts the required libraries at startup. The Qt bundle
 will be larger than the old Tkinter EXE. Build on Windows: the release was checked
 with Qt's offscreen platform on Linux, not as a Windows binary.
 
-## Build on GitHub
+## Build and publish on GitHub
 
-The **Build Windows EXE** workflow runs on a GitHub-hosted Windows x64 runner.
-It starts automatically when source, examples, dependencies or the workflow change
-on `main`. To build manually, open **Actions > Build Windows EXE > Run workflow**.
+Builds run **only manually**. Open **Actions > Build Windows EXE > Run workflow**,
+select the source branch and enter a new release tag (for example `v1.2.2`).
+Source changes and pushes do not start a build.
 
-After a successful run, open its summary and download
-**VerilogCanvasQt-windows-x64** from **Artifacts**. Extract the ZIP and run
-`VerilogCanvasQt.exe`. The accompanying checksum and build information files are
-for verification only; the executable does not require them.
+The Windows x64 runner tests the model and all six Qt checks, then builds the
+standalone executable. After success it publishes a GitHub Release containing:
 
-Artifacts are retained for 30 days. The workflow runs the model and six Qt checks
-before packaging with PyInstaller. It uses Python 3.12 and read-only repository
-permissions; no personal token or signing secret is required. These builds are
-unsigned and are not automatically published as GitHub Releases.
+- `VerilogCanvasQt.exe`: the standalone application, downloaded directly.
+- `VerilogCanvas-source.zip`: tracked sources from the exact commit built,
+  with a `VerilogCanvas/` root folder.
+- `SHA256SUMS.txt` and `BUILD_INFO.txt`: checksums and build details.
+
+Download these files from the repository's **Releases** page. They are release
+assets, not temporary Actions artifacts. Existing tags are rejected to avoid
+replacing a published version; choose a new tag for each release. The release
+is prepared as a draft and published only after all assets upload successfully.
+If upload/publication fails, inspect the draft before retrying.
+
+The workflow uses Python 3.12 and the built-in GitHub token with
+`contents: write` permission for release publication. No personal token is
+required. Executables are unsigned.
 
 ## Editing
 
