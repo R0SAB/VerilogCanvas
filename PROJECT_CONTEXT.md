@@ -250,11 +250,32 @@ general optimal autorouter.
   selection/resize indicators. Current resolution limits are documented in README.
 - Preserve the export destination through ordinary undo/redo operations.
 
+## GitHub-hosted Windows builds (2026-10-05)
+
+- `.github/workflows/build-windows.yml` builds on Windows Server 2022 x64 with
+  Python 3.12. Source/dependency/example/workflow/checkout-attribute changes on
+  main trigger it; workflow_dispatch permits manual builds.
+- The model suite and all six Qt smoke scripts have passed on the Windows runner.
+  The model run reports 166 tests, including 12 skips for unavailable optional
+  HDL compiler dependencies. This does not replace interactive user acceptance
+  testing of the packaged executable.
+- PyInstaller produces the one-file windowed EXE. The workflow uploads
+  `VerilogCanvasQt-windows-x64` with the EXE, SHA256SUMS.txt and BUILD_INFO.txt,
+  retaining artifacts for 30 days. README explains downloading/manual triggering.
+- Actions are pinned by commit; repository permission is contents:read.
+  No signing or automatic GitHub Release publication is configured.
+- **Keep `*.vsch -text` in .gitattributes.** These files contain byte-counted
+  HDL records. Windows Git newline conversion corrupted example records and
+  caused a modal load error during the first CI attempt.
+- Export path assertions compare resolved Path objects, because textual
+  temporary paths and their canonical Windows representation can differ.
+- Qt checks are separate steps with two-minute limits so an unexpected modal
+  dialog cannot leave the entire build waiting indefinitely.
+
 ## Continuation checklist
 
 At this handoff the latest wire fixes were accepted by the user; no additional
-specific code change is pending. The immediate task is preserving project context
-in this repository.
+specific code change is pending. Project context is preserved here and Windows CI is now configured.
 
 For the next task: read this file and README, inspect current source/commits,
 reproduce the new report on an example or a copy of the user's schematic, make a
