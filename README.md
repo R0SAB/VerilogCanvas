@@ -13,6 +13,17 @@ The interface is English.
 
 A schematic can also be dropped onto the batch file or passed to the EXE.
 
+## Run on Linux / macOS
+
+1. Install Python 3.12 or newer with `venv` and `pip` support.
+2. Run `./run_qt_unix.sh`. First launch installs PySide6 in `.venv-qt`.
+3. Open an existing `.vsch` or create a new schematic.
+
+You can pass a schematic path: `./run_qt_unix.sh path/to/design.vsch`.
+To select a Python interpreter, use `PYTHON=python3.12 ./run_qt_unix.sh`.
+On Linux, your distribution may require a separate Python `venv` package and
+Qt platform libraries for your desktop environment.
+
 ## Build the standalone EXE
 
 Run `build_qt_windows.bat`. It installs dependencies, runs model and Qt interface
@@ -22,6 +33,24 @@ The EXE includes Python and Qt; the target machine needs neither installed.
 Single-file packaging extracts the required libraries at startup. The Qt bundle
 will be larger than the old Tkinter EXE. Build on Windows: the release was checked
 with Qt's offscreen platform on Linux, not as a Windows binary.
+
+## Build a standalone Linux / macOS application
+
+Run `./build_qt_nix.sh` on the target operating system. It requires Python 3.12
+or newer with `venv` and `pip` support, installs PySide6 and PyInstaller in
+`.venv-qt`, and runs the model suite and all six Qt checks before packaging.
+Use `PYTHON=python3.12 ./build_qt_nix.sh` to select an interpreter.
+
+- Linux: `dist/VerilogCanvasQt`, a single executable.
+- macOS: `dist/VerilogCanvasQt.app`, a directory-based application bundle.
+  Distribute the entire `.app` bundle.
+
+Python and Qt are bundled; recipients do not need to install Python. Builds
+are specific to the build OS and CPU architecture; this is not cross-compilation.
+Linux still needs compatible system libraries and desktop/Qt platform libraries.
+Build on the oldest Linux distribution you intend to support, since PyInstaller
+does not bundle glibc. On macOS, distribution signing and notarization are separate
+steps; this script does not configure a signing identity or notarization.
 
 ## Build and publish on GitHub
 
